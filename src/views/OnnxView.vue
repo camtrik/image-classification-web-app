@@ -142,17 +142,17 @@ const openMediaDevices = async (constraints: MediaStreamConstraints) => {
 }
 
 onMounted(async () => {
-  // 加载默认模型
-  const defaultModelUrl = '/resnet18_imagenet.onnx'; // 默认模型的 URL，根据实际情况修改
-  isLoadingModel.value = true;
-  try {
-    model.value = await ort.InferenceSession.create(defaultModelUrl, {
-      executionProviders: [executionProvider.value]
-    });
-  } catch (error) {
-    console.error('Failed to load default model 模型加载失败:', error);
-  }
-  isLoadingModel.value = false;
+  // Load default model (too slow)
+  // const defaultModelUrl = '/resnet18_imagenet.onnx'; // 默认模型的 URL，根据实际情况修改
+  // isLoadingModel.value = true;
+  // try {
+  //   model.value = await ort.InferenceSession.create(defaultModelUrl, {
+  //     executionProviders: [executionProvider.value]
+  //   });
+  // } catch (error) {
+  //   console.error('Failed to load default model 模型加载失败:', error);
+  // }
+  // isLoadingModel.value = false;
   // get camera
   console.log('Get Cameras')
   try {
@@ -471,22 +471,35 @@ const imagePredictHandler = async () => {
           <br />
         </p>
         <p class="leading-6">
-          You can download the ONNX model from the link above, and also you can download the example images and use them to test the model.
-        </p>
-        <p class="leading-6">
-          The default model is resnet-18 trained on Imagenet-1000, You can change it by your own model in onnx format.
-          If you change the model, you should also change the class index file. The format can be refer to the example json file.
-          >
+          1. Upload a trained model in onnx format and the corresponding class index file in json format.
+           Some examples are given in the link above.
+          <br>
+          2. Upload the image you want to predict. Or use camera to predict in real time.
+          <br>
+          You can download the ONNX model from the link above, and also you can download
+           the example images and use them to test the model.
+          <br>
+          If you change the model, you should also change the class index file.
+           The format can be refer to the example json file.
+
         </p>
         <p>
           <br>
         </p>
         <p class="leading-6">
-          Link of Github：<a
-            href="https://github.com/TommyZihao/Train_Custom_Dataset"
+          Convert pytorch model to onnx <a
+            href="https://colab.research.google.com/drive/1tuko14EQQorQDBecR5_KFbLeTmFFRNw4?usp=sharing"
             target="_blank"
             class="text-blue-500 no-underline visited:text-blue-700"
-            >https://space.bilibili.com/1900783</a
+            >Example</a
+          >
+        </p>
+        <p class="leading-6">
+          Link of <a
+            href="https://github.com/camtrik/image-classification-web-app"
+            target="_blank"
+            class="text-blue-500 no-underline visited:text-blue-700"
+            >Github</a
           >
         </p>
       </article>

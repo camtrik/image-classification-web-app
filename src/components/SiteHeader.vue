@@ -10,6 +10,6 @@
 <style lang="scss" scoped>
   header {
     font-size: 24px;
-    color: #fcaf20;
+    color: #000000c0;
   }
 </style>
